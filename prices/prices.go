@@ -7,6 +7,7 @@ import (
 	"ishanlakhwani.com/price-calculator/iomanager"
 )
 
+// these json keys are called struct tags, if you add - then that data will not be written in json
 type TaxIncludedPriceJob struct {
 	IOManager         iomanager.IOManager `json:"-"`
 	TaxRate           float64             `json:"tax_rate"`
@@ -52,6 +53,7 @@ func (job *TaxIncludedPriceJob) Process(doneChan chan bool, errorChan chan error
 
 	job.TaxIncludedPrices = result
 	job.IOManager.WriteResult(job)
+	// tell done channel that is has completed executing
 	doneChan <- true
 }
 
